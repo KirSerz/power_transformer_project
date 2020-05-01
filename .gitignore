@@ -131,7 +131,3 @@ dmypy.json
 # project
 *migrations
 .gitignore
-.vscode/settings.json
-.gitignore
-requirements.txt
-requirements.txt
