@@ -5,7 +5,7 @@ from .managers import CustomUserManager
 
 class Substation(models.Model):
     name = models.CharField("Название организации", max_length=200, default='')
-    city = models.CharField("Город", max_length=200, default='')
+    city = models.CharField("City", max_length=200, default='')
     street = models.CharField("Улица", max_length=200, default='')
     descriptions = models.CharField("Описание", max_length=200, default='')
     date = models.DateTimeField('Дата изменениея баланса', auto_now_add=True)
