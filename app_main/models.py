@@ -6,9 +6,9 @@ from .managers import CustomUserManager
 # Create your models here.
 class User(AbstractUser):
     username = None
-    email = models.CharField("User's Email", max_length=200, unique=True)
-      
-    USERNAME_FIELD = 'email'
+    ID = models.CharField("User's ID", max_length=200, unique=True)
+    substation = models.CharField("Substation location", max_length=200, unique=True)  
+    USERNAME_FIELD = 'ID'
     REQUIRED_FIELDS = []
     
     objects = CustomUserManager()
