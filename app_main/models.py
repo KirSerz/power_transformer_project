@@ -19,16 +19,3 @@ class User(AbstractUser):
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
 
-class Transformer(models.Model):
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    transformer_ID = models.CharField("Transformer's ID", max_length=200, unique=True)
-    location = models.CharField("Location", max_length=200, unique=True)
-
-class DataDGA(models.Model):
-    
-    transformer = models.ForeignKey(Transformer, on_delete=models.CASCADE)
-    data_dga = models.TextField('Данные DGA(json)', blank=True, default='')
-    classification_score = models.FloatField('Оценка классификатора', default=0)   
-    
-    
