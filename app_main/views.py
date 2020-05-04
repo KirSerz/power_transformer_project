@@ -1,4 +1,14 @@
 from django.shortcuts import render
+from .models import Substation
+from .models import User
+from .models import Transformer
+from .models import DataDGA
+
+
+def post_list(request):
+    
+    return render(request, 'post_list.html', {})
+
 
 from django.http import HttpResponse, JsonResponse
 from django.views import View
@@ -13,3 +23,5 @@ class BasePage(View):
         context = {}
         context['status'] = 'ok'
         return JsonResponse(context)
+
+
