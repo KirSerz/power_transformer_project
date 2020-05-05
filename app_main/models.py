@@ -43,6 +43,16 @@ class Transformer(models.Model):
     def __str__(self):
         return '{0} {1}'.format(self.unique_key, self.substation)
     
+    def upload_data(self, 
+        classification_score = None, 
+        data_dga = None
+    ):
+        new_item = DataDGA()
+        new_item.transformer = self
+        new_item.data_dga = data_dga
+        new_item.classification_score = classification_score
+        new_item.save()
+
     class Meta:
 	    verbose_name_plural = "Трансформатор"
 
