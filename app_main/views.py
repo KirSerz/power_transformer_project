@@ -1,8 +1,14 @@
+from django.contrib.auth.models import User
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from .models import Substation
-from .models import User
-from .models import Transformer
-from .models import DataDGA
+from django.utils.decorators import method_decorator
+from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.views.generic import (CreateView, DetailView, ListView,
+                                  RedirectView, TemplateView)
+
+from .models import DataDGA, Substation, Transformer, User
 
 
 def post_list(request):
@@ -20,10 +26,11 @@ def post_list(request):
         transformers=[]
         transformer_data={}
     
-    data_DGA=DataDGA.objects.filter(transformer__in=transformers).order_by('date')
+    data_DGA = DataDGA.objects.filter(transformer__in = transformers).order_by('date')
     for dga in data_DGA:
         transformer_data[dga.transformer.id]["data"].append(dga)
-    context["data_transformers"]=transformer_data.values()
+
+    context["data_transformers"]=list(transformer_data.values())
     return render(request, 'post_list.html', context)
 
 
@@ -44,7 +51,7 @@ class ApiAddDataDGA(View):
         context = {}
         context['status'] = 'ok'
         context['message'] = ''
-        id_transformer = request.POST.get('unique_key')
+        unique_key = request.POST.get('unique_key')
         
         # TODO add model forms, validation form
 
@@ -52,9 +59,11 @@ class ApiAddDataDGA(View):
             transformer = Transformer.objects.get(unique_key = unique_key)
         except:
             transformer = None
-
-        if id_transformer:
-            new_data_dga = transformer.upload_data(
+        
+        # TODO classifications data dga and calculation classification_score
+        
+        if transformer:
+            transformer.upload_data(
                 classification_score = None, 
                 data_dga = request.POST.get('data_dga')
             )
@@ -69,5 +78,4 @@ class ApiAddDataDGA(View):
         context['status'] = 'error'
         context['message'] = 'Invalid id method'
         return JsonResponse(context)
-
 
