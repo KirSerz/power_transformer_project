@@ -19,14 +19,12 @@ class Substation(models.Model):
     class Meta:
 	    verbose_name_plural = "Подстанция"
 
-# Create your models here.
 class User(AbstractUser):
     username = None
     email = models.CharField("User's Email", max_length=200, unique=True)
     substation = models.ForeignKey(Substation, on_delete=models.CASCADE, blank=True, null=True, default=None)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-    
     objects = CustomUserManager()
 
     def __str__(self):
