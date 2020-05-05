@@ -45,7 +45,7 @@ class ApiAddDataDGA(View):
         context = {}
         context['status'] = 'ok'
         context['message'] = ''
-        id_transformer = request.POST.get('unique_key')
+        unique_key = request.POST.get('unique_key')
         
         # TODO add model forms, validation form
 
@@ -53,9 +53,11 @@ class ApiAddDataDGA(View):
             transformer = Transformer.objects.get(unique_key = unique_key)
         except:
             transformer = None
-
-        if id_transformer:
-            new_data_dga = transformer.upload_data(
+        
+        # TODO classifications data dga and calculation classification_score
+        
+        if transformer:
+            transformer.upload_data(
                 classification_score = None, 
                 data_dga = request.POST.get('data_dga')
             )
