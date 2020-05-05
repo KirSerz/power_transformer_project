@@ -20,7 +20,7 @@ def post_list(request):
         transformers=[]
         transformer_data={}
     
-    data_DGA=DataDGA.objects.filter(transformer__in=transformers).order_by('date')
+    data_DGA = DataDGA.objects.filter(transformer__in = transformers).order_by('date')
     for dga in data_DGA:
         transformer_data[dga.transformer.id]["data"].append(dga)
 
@@ -72,5 +72,4 @@ class ApiAddDataDGA(View):
         context['status'] = 'error'
         context['message'] = 'Invalid id method'
         return JsonResponse(context)
-
 
