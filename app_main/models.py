@@ -1,10 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, PermissionsMixin, UserManager
-from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import AbstractUser
 from .managers import CustomUserManager
-from django.conf import settings
-from django.db import models
-from django.utils import timezone
 
 class Substation(models.Model):
     date = models.DateTimeField(auto_now_add=True)
@@ -43,9 +39,10 @@ class Transformer(models.Model):
     def __str__(self):
         return '{0} {1}'.format(self.unique_key, self.substation)
     
-    def upload_data(self, 
-        classification_score = None, 
-        data_dga = None
+    def upload_data(
+        self, 
+        classification_score=None, 
+        data_dga=None
     ):
         new_item = DataDGA()
         new_item.transformer = self
