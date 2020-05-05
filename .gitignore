@@ -133,3 +133,5 @@ dmypy.json
 .gitignore
 .vscode/settings.json
 .gitignore
+requirements.txt
+requirements.txt
