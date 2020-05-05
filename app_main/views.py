@@ -23,7 +23,8 @@ def post_list(request):
     data_DGA=DataDGA.objects.filter(transformer__in=transformers).order_by('date')
     for dga in data_DGA:
         transformer_data[dga.transformer.id]["data"].append(dga)
-    context["data_transformers"]=transformer_data.values()
+
+    context["data_transformers"]=list(transformer_data.values())
     return render(request, 'post_list.html', context)
 
 
