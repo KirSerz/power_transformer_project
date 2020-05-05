@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from app_main.views import BasePage
+from app_main.views import ApiAddDataDGA
 from django.urls import path
 from . import views
 
