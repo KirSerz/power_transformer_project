@@ -1,15 +1,14 @@
-from django.shortcuts import render
-from .models import Substation
-from .models import User
-from .models import Transformer
-from .models import DataDGA
-from django.http import HttpResponse, JsonResponse
-from django.views import View
-from django.views.generic import ListView, DetailView, TemplateView, CreateView, RedirectView
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.views.generic import (CreateView, DetailView, ListView,
+                                  RedirectView, TemplateView)
+
+from .models import DataDGA, Substation, Transformer, User
 
 
 def post_list(request):
@@ -27,7 +26,7 @@ def post_list(request):
         transformers=[]
         transformer_data={}
     
-    data_DGA = DataDGA.objects.filter(transformer__in=transformers).order_by('date')
+    data_DGA = DataDGA.objects.filter(transformer__in = transformers).order_by('date')
     for dga in data_DGA:
         transformer_data[dga.transformer.id]["data"].append(dga)
 
@@ -67,5 +66,4 @@ class ApiAddDataDGA(View):
         context['status'] = 'error'
         context['message'] = 'Invalid id method'
         return JsonResponse(context)
-
 
