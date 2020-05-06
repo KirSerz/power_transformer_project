@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from .managers import CustomUserManager
 
 class Substation(models.Model):
-    date = models.DateTimeField(auto_now_add=True)
+    date_add = models.DateTimeField(auto_now_add=True)
     name = models.CharField("Название организации", max_length=200, default='')
     city = models.CharField("City", max_length=200, default='')
     street = models.CharField("Улица", max_length=200, default='')
@@ -31,7 +31,7 @@ class User(AbstractUser):
 
 class Transformer(models.Model):
 
-    date = models.DateTimeField(auto_now_add=True)
+    date_add = models.DateTimeField(auto_now_add=True)
     substation = models.ForeignKey(Substation, on_delete=models.CASCADE)
     unique_key = models.CharField("Transformer's ID", max_length=200, default='')
     descriptions = models.TextField("Описание", max_length=200, default='')
@@ -54,7 +54,7 @@ class Transformer(models.Model):
 	    verbose_name_plural = "Трансформатор"
 
 class DataDGA(models.Model):
-    date = models.DateTimeField(auto_now_add=True)
+    date_add = models.DateTimeField(auto_now_add=True)
     transformer = models.ForeignKey(Transformer, on_delete=models.CASCADE)
     data_dga = models.TextField('Данные DGA(json)', blank=True, default='')
     classification_score = models.FloatField('Оценка классификатора', blank=True, null=True, default=None)
