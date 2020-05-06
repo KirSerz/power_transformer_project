@@ -20,7 +20,7 @@ def post_list(request):
         transformers = []
         transformer_data = {}
     
-    data_dga = DataDGA.objects.filter(transformer__in=transformers).order_by('date')
+    data_dga = DataDGA.objects.filter(transformer__in=transformers).order_by('date_add')
     for dga in data_dga:
         transformer_data[dga.transformer.id]["data"].append(dga)
 
