@@ -4,19 +4,33 @@
     </head>
     <body>
         <div>
-           
-        </div>
-
-        <div>
-            
-        </div>
-
-        <div>
-        
-        </div>
-
-        <div>
-        
+            <table border: 1px solid grey>
+                <tbody>
+                    <tr> {% for data_transformer in data_transformers %}
+                         <td>  
+                            {{ data_transformer.transformer.unique_key }}
+                             
+                                
+                                    {% for data_dga in data_transformer.data %}
+                            <tr> 
+                                       {% if data_dga.classification_score > 0 %}
+                                        <div color:red>
+                                            {{ data_dga.classification_score }}
+                                            {{ data_dga.pdate }}
+                                        </div>
+                                    {% else %}
+                                        <div color:green>
+                                            {{ data_dga.classification_score }}
+                                            {{ data_dga.pdate }}
+                                        </div>
+                                        {% endif%}
+                                
+                             </tr>   
+                                {% endfor%}
+                        </td>  
+                        {% endfor %}</tr>
+                 </tbody>
+            </table>
         </div>
     </body>
 </html>
