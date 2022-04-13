@@ -1,13 +1,8 @@
-from django.http import JsonResponse
 from django.shortcuts import render
-from django.utils.decorators import method_decorator
-from django.views import View
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
-from django.views.generic import (CreateView, DetailView, ListView,
-                                  RedirectView, TemplateView)
-
-from .models import DataDGA, Substation, Transformer, User
+from .models import Substation
+from .models import User
+from .models import Transformer
+from .models import DataDGA
 
 
 def post_list(request):

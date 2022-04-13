@@ -5,7 +5,7 @@ from .managers import CustomUserManager
 class Substation(models.Model):
     date_add = models.DateTimeField(auto_now_add=True)
     name = models.CharField("Название организации", max_length=200, default='')
-    city = models.CharField("City", max_length=200, default='')
+    city = models.CharField("Город", max_length=200, default='')
     street = models.CharField("Улица", max_length=200, default='')
     descriptions = models.CharField("Описание", max_length=200, default='')
 
@@ -30,6 +30,7 @@ class User(AbstractUser):
         swappable = 'AUTH_USER_MODEL'
 
 class Transformer(models.Model):
+    """добавить спецификации трансформатора"""
 
     date_add = models.DateTimeField(auto_now_add=True)
     substation = models.ForeignKey(Substation, on_delete=models.CASCADE)
@@ -59,4 +60,8 @@ class DataDGA(models.Model):
     data_dga = models.TextField('Данные DGA(json)', blank=True, default='')
     classification_score = models.FloatField('Оценка классификатора', blank=True, null=True, default=None)
     
+    def __str__(self):
+        return '{0}'.format(self.classification_score)
     
+    class Meta:
+	    verbose_name_plural = "Данные DGA"
