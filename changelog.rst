@@ -1,8 +1,12 @@
-<h1>Document Heading</h1>
+================
+Document Heading
+================
 
-<h2>Heading</h2>
+Heading
+=======
 
-<h3>Sub-heading</h3>
+Sub-heading
+-----------
 
-<p>Paragraphs are separated
-by a blank line.</p>
+Paragraphs are separated
+by a blank line.
